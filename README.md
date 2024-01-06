@@ -19,6 +19,7 @@ napisane przez KN BIT.
   - numpy
   - matplotlib
   - pandas
+
 Wersje bibliotek podane są w pliku `requirements.txt`
 
 ## Jak używać
