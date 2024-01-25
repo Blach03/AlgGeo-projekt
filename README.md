@@ -1,4 +1,5 @@
 # Przetwarzanie i przechowywanie opisu siatki trójkątnej na płaszczyźnie
+*Mateusz Zając, Błażej Kapkowski*
 
 ## Opis programu
 Program daje możliwość wczytywania i zapisywania opisów siatek trójkątnych.
@@ -15,10 +16,8 @@ napisane przez KN BIT.
 ## Wymagania techniczne
 - Python 3.10.12
 - biblioteki:
-  - memory-profiler
   - numpy
   - matplotlib
-  - pandas
 
 Wersje bibliotek podane są w pliku `requirements.txt`
 
@@ -44,11 +43,14 @@ Każdy wiersz pliku z triangulacją przyjmuje jedną z dwóch postaci:
 - litera `t` i trzy liczby całkowite, wszystko oddzielone spacją, np. `t 0 1 4`.
 
 ### Wyświetlenie triangulacji:
-By wyświetlić siatkę, należy wywołać funkcję `draw_triangulation(vertices, triangles)`.
+By wyświetlić siatkę, należy wywołać funkcję `draw_triangulation(vertices, triangles, vis)`, gdzie `vis` to obiekt klasy
+`Visualizer()`. Funkcja zwraca obiekt tej samej klasy, co `vis`. Należy na nim użyć metody `.show()`.
 
 ```py
+vis = Visualizer()
 vertices, triangles = load_from_file("sample_triangulation4.txt")
-draw_triangulation(vertices, triangles)
+vis = draw_triangulation(vertices, triangles, vis)
+vis.show()
 save_to_file("triangulation_copy.txt", vertices, triangles)
 ```
 
@@ -127,6 +129,7 @@ przedstawi kolejne kroki wykonywania algorytmu, każdy krok pokazany co `delay` 
 ```python
 vis = Visualizer()
 vertices, triangles = load_from_file("sample_triangulation4.txt")
+vis = draw_triangulation(vertices, triangles, vis)
 half_edges = HalfEdgeGraph(vertices, triangles)
 neighbors, vis = half_edges.incidental_vertices_visualize(5, 2, vis)
 vis.show_gif(500)
@@ -143,6 +146,7 @@ Sposób wywoływania analogiczny jak w pierwszej operacji.
 ```python
 vis = Visualizer()
 vertices, triangles = load_from_file("sample_triangulation4.txt")
+vis = draw_triangulation(vertices, triangles, vis)
 half_edges = HalfEdgeGraph(vertices, triangles)
 neighbors, vis = half_edges.incidental_triangles_visualize(2, 2, vis)
 vis.show_gif(500)
@@ -160,6 +164,7 @@ Wywoływanie - analogiczne.
 ```python
 vis = Visualizer()
 vertices, triangles = load_from_file("sample_triangulation4.txt")
+vis = draw_triangulation(vertices, triangles, vis)
 half_edges = HalfEdgeGraph(vertices, triangles)
 found_triangle, vis = half_edges.seek_vertex_visualize(2, 2, vis)
 vis.show_gif(500)
